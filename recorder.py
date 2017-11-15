@@ -9,8 +9,10 @@ def capt_data(network, port):
 		p = dpkt.ethernet.Ethernet(pdata)
 		if (p.data.__class__.__name__ == 'IP'):
 			ip = '%d.%d.%d.%d' % tuple(map(ord, list(p.data.dst)))
-			print ip,
-			print p.data.data.data
+			if (p.data.data.data != ""):
+				print ip, "send %d bytes" % tem.data.len
+				print p.data.data.data.encode("hex")
+				print p.data.data.data
 
 
 if __name__ == '__main__':
