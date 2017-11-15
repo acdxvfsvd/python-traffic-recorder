@@ -6,12 +6,11 @@ def capt_data(network, port):
 	pc = pcap.pcap(network)
 	pc.setfilter('port ' + port)
 	for ptime, pdata in pc:
-		print ptime
-#		p = dpkt.ethernet.Ethernet(pdata)
-#		print pdata
-#		if (p.data.__class__.__name__ == 'IP'):
-#			ip = '%d.%d.%d.%d' % tuple(map(ord, list(p.data.dst)))
-#			print ip
+		p = dpkt.ethernet.Ethernet(pdata)
+		if (p.data.__class__.__name__ == 'IP'):
+			ip = '%d.%d.%d.%d' % tuple(map(ord, list(p.data.dst)))
+			print ip,
+			print p.data.data.data
 
 
 if __name__ == '__main__':
