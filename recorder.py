@@ -11,7 +11,7 @@ def capt_data(network, port, filename):
 			if (p.data.data.data != "" and p.data.data.data != "\n"):
 				src_ip = '%d.%d.%d.%d' % tuple(map(ord, list(p.data.src)))
 				dst_ip = '%d.%d.%d.%d' % tuple(map(ord, list(p.data.src)))
-				d = src.ip + ' -> ' + dst.ip + ' ' + p.data.data.data
+				d = src_ip + ' -> ' + dst_ip + ' ' + p.data.data.data
 				with open(filename, 'a') as f:
 					f.writeline(d)
 					f.writeline(ip, p.data.data.data.encode("hex"))
