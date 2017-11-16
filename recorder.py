@@ -8,7 +8,7 @@ def capt_data(network, port, filename):
 	for ptime, pdata in pc:
 		p = dpkt.ethernet.Ethernet(pdata)
 		if (p.data.__class__.__name__ == 'IP'):
-			if (p.data.data.data != "" && p.data.data.data != "\n"):
+			if (p.data.data.data != "" and p.data.data.data != "\n"):
 				src_ip = '%d.%d.%d.%d' % tuple(map(ord, list(p.data.src)))
 				dst_ip = '%d.%d.%d.%d' % tuple(map(ord, list(p.data.src)))
 				d = src.ip + ' -> ' + dst.ip + ' ' + p.data.data.data
