@@ -4,15 +4,17 @@ import argparse
 
 def capt_data(network, port, filename):
 	pc = pcap.pcap(network)
-	pc.setfilter('port ' + port)
+	pc.setfilter('tcp port ' + port)
 	for ptime, pdata in pc:
 		p = dpkt.ethernet.Ethernet(pdata)
 		if (p.data.__class__.__name__ == 'IP'):
-			ip = '%d.%d.%d.%d' % tuple(map(ord, list(p.data.dst)))
-			if (p.data.data.data != ""):
-				print ip, "send %d bytes" % p.data.data.len
-				print p.data.data.data.encode("hex")
-				print p.data.data.data
+			if (p.data.data.data != "" && p.data.data.data != "\n"):
+				src_ip = '%d.%d.%d.%d' % tuple(map(ord, list(p.data.src)))
+				dst_ip = '%d.%d.%d.%d' % tuple(map(ord, list(p.data.src)))
+				d = src.ip + ' -> ' + dst.ip + ' ' + p.data.data.data
+				with open(filename, 'a') as f:
+					f.writeline(d)
+					f.writeline(ip, p.data.data.data.encode("hex"))
 
 
 if __name__ == '__main__':
